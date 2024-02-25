@@ -11,15 +11,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'AppName',
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.transparent,
-        ),
-        colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.green,
-        ),
-      ),
+      title: 'SpamDetect',
+      theme: ThemeData.dark(),
       home: const HomePage(),
     );
   }
