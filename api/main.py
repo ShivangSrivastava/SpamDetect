@@ -3,9 +3,6 @@ from controller.prediction import predict
 
 from model.model import InputData
 
-
-
-
 app = FastAPI()
 
 @app.post("/api/check")
