@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:frontend/core/app_theme.dart';
 import 'package:frontend/model/preview_page_model.dart';
 
 class PreviewPageWidget extends StatefulWidget {
@@ -36,31 +38,18 @@ class _PreviewPageWidgetState extends State<PreviewPageWidget> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primary,
-          automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderRadius: 8,
-            buttonSize: 40,
-            fillColor: FlutterFlowTheme.of(context).primary,
-            icon: Icon(
-              Icons.arrow_back,
-              color: FlutterFlowTheme.of(context).info,
-              size: 24,
-            ),
-            onPressed: () {
-              print('IconButton pressed ...');
-            },
-          ),
+          backgroundColor: FlutterFlowTheme.of(context).primaryColor,
           title: Text(
             'Page Title',
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Inter Tight',
-                  color: Colors.white,
-                  fontSize: 22,
-                  letterSpacing: 0.0,
-                ),
+            style:
+                FlutterFlowTheme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontFamily: 'Inter Tight',
+                      color: Colors.white,
+                      fontSize: 22,
+                      letterSpacing: 0.0,
+                    ),
           ),
           actions: const [],
           centerTitle: false,
@@ -82,7 +71,7 @@ class _PreviewPageWidgetState extends State<PreviewPageWidget> {
                         padding: const EdgeInsets.all(8),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context).primary,
+                            color: FlutterFlowTheme.of(context).primaryColor,
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Padding(
@@ -90,11 +79,12 @@ class _PreviewPageWidgetState extends State<PreviewPageWidget> {
                             child: Text(
                               '22-03-2020',
                               style: FlutterFlowTheme.of(context)
+                                  .textTheme
                                   .bodyMedium
-                                  .override(
+                                  ?.copyWith(
                                     fontFamily: 'Inter',
                                     color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
+                                        .dialogBackgroundColor,
                                     letterSpacing: 0.0,
                                   ),
                             ),
@@ -117,7 +107,7 @@ class _PreviewPageWidgetState extends State<PreviewPageWidget> {
                       minHeight: 100,
                     ),
                     decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).alternate,
+                      color: FlutterFlowTheme.of(context).canvasColor,
                       borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(0),
                         bottomRight: Radius.circular(30),
@@ -131,11 +121,13 @@ class _PreviewPageWidgetState extends State<PreviewPageWidget> {
                         padding: const EdgeInsets.all(16),
                         child: Text(
                           'Hello World',
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Inter',
-                                    letterSpacing: 0.0,
-                                  ),
+                          style: FlutterFlowTheme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(
+                                fontFamily: 'Inter',
+                                letterSpacing: 0.0,
+                              ),
                         ),
                       ),
                     ),
@@ -148,7 +140,7 @@ class _PreviewPageWidgetState extends State<PreviewPageWidget> {
                   width: MediaQuery.sizeOf(context).width,
                   height: 50,
                   decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).alternate,
+                    color: FlutterFlowTheme.of(context).canvasColor,
                     borderRadius: BorderRadius.circular(24),
                   ),
                   child: Row(
@@ -168,15 +160,17 @@ class _PreviewPageWidgetState extends State<PreviewPageWidget> {
                               decoration: InputDecoration(
                                 isDense: true,
                                 labelStyle: FlutterFlowTheme.of(context)
+                                    .textTheme
                                     .labelMedium
-                                    .override(
+                                    ?.copyWith(
                                       fontFamily: 'Inter',
                                       letterSpacing: 0.0,
                                     ),
                                 hintText: 'Message',
                                 hintStyle: FlutterFlowTheme.of(context)
+                                    .textTheme
                                     .labelMedium
-                                    .override(
+                                    ?.copyWith(
                                       fontFamily: 'Inter',
                                       letterSpacing: 0.0,
                                     ),
@@ -195,28 +189,29 @@ class _PreviewPageWidgetState extends State<PreviewPageWidget> {
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 errorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).error,
+                                  borderSide: const BorderSide(
+                                    color: Color(0xffff5963),
                                     width: 1,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 focusedErrorBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: FlutterFlowTheme.of(context).error,
+                                  borderSide: const BorderSide(
+                                    color: Color(0xffff5963),
                                     width: 1,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                               ),
                               style: FlutterFlowTheme.of(context)
+                                  .textTheme
                                   .bodyMedium
-                                  .override(
+                                  ?.copyWith(
                                     fontFamily: 'Inter',
                                     letterSpacing: 0.0,
                                   ),
                               cursorColor:
-                                  FlutterFlowTheme.of(context).primaryText,
+                                  FlutterFlowTheme.of(context).dividerColor,
                               validator: _model.textControllerValidator
                                   .asValidator(context),
                             ),
@@ -228,11 +223,13 @@ class _PreviewPageWidgetState extends State<PreviewPageWidget> {
                         buttonSize: 40,
                         icon: Icon(
                           Icons.send_rounded,
-                          color: FlutterFlowTheme.of(context).primary,
+                          color: FlutterFlowTheme.of(context).primaryColor,
                           size: 24,
                         ),
                         onPressed: () {
-                          print('IconButton pressed ...');
+                          if (kDebugMode) {
+                            print('IconButton pressed ...');
+                          }
                         },
                       ),
                     ],

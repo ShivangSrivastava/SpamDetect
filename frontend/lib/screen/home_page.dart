@@ -1,9 +1,19 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:frontend/core/app_theme.dart';
 import 'package:frontend/model/home_page_model.dart';
+import 'package:frontend/screen/test_page.dart';
+import 'package:frontend/widgets/message_card_widget.dart';
 
 class HomePageWidget extends StatefulWidget {
-  const HomePageWidget({super.key});
+  final bool isDark;
+  final VoidCallback changeTheme;
+  const HomePageWidget({
+    Key? key,
+    required this.isDark,
+    required this.changeTheme,
+  }) : super(key: key);
 
   @override
   State<HomePageWidget> createState() => _HomePageWidgetState();
@@ -40,21 +50,25 @@ class _HomePageWidgetState extends State<HomePageWidget>
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).scaffoldBackgroundColor,
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            print('FloatingActionButton pressed ...');
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const TestPageWidget(),
+                ));
           },
-          backgroundColor: FlutterFlowTheme.of(context).primary,
+          backgroundColor: FlutterFlowTheme.of(context).primaryColor,
           elevation: 8,
-          child: Icon(
+          child: const Icon(
             Icons.message,
-            color: FlutterFlowTheme.of(context).info,
+            color: Colors.white,
             size: 24,
           ),
         ),
         appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primary,
+          backgroundColor: FlutterFlowTheme.of(context).primaryColor,
           automaticallyImplyLeading: false,
           title: Align(
             alignment: const AlignmentDirectional(-1, 0),
@@ -63,7 +77,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
               child: Text(
                 'Sms Spam Detection',
                 textAlign: TextAlign.start,
-                style: FlutterFlowTheme.of(context).headlineMedium.override(
+                style: FlutterFlowTheme.of(context)
+                    .textTheme
+                    .headlineMedium
+                    ?.copyWith(
                       fontFamily: 'Inter Tight',
                       color: Colors.white,
                       fontSize: 22,
@@ -72,9 +89,16 @@ class _HomePageWidgetState extends State<HomePageWidget>
               ),
             ),
           ),
-          actions: const [],
+          actions: [
+            IconButton(
+              icon: Icon(widget.isDark ? Icons.nightlight : Icons.sunny),
+              onPressed: () {
+                widget.changeTheme();
+              },
+            )
+          ],
           centerTitle: false,
-          elevation: 2,
+          elevation: 0,
         ),
         body: SafeArea(
           top: true,
@@ -82,7 +106,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
             width: MediaQuery.sizeOf(context).width,
             height: MediaQuery.sizeOf(context).height * 1,
             decoration: BoxDecoration(
-              color: FlutterFlowTheme.of(context).primary,
+              color: FlutterFlowTheme.of(context).primaryColor,
             ),
             child: Column(
               children: [
@@ -90,19 +114,24 @@ class _HomePageWidgetState extends State<HomePageWidget>
                   alignment: const Alignment(0, 0),
                   child: TabBar(
                     labelColor:
-                        FlutterFlowTheme.of(context).secondaryBackground,
+                        FlutterFlowTheme.of(context).dialogBackgroundColor,
                     unselectedLabelColor: const Color(0x8CE0E3E7),
-                    labelStyle:
-                        FlutterFlowTheme.of(context).titleMedium.override(
-                              fontFamily: 'Inter Tight',
-                              letterSpacing: 0.0,
-                            ),
-                    unselectedLabelStyle:
-                        FlutterFlowTheme.of(context).titleMedium.override(
-                              fontFamily: 'Inter Tight',
-                              letterSpacing: 0.0,
-                            ),
-                    indicatorColor: FlutterFlowTheme.of(context).primary,
+                    labelStyle: FlutterFlowTheme.of(context)
+                        .textTheme
+                        .titleMedium
+                        ?.copyWith(
+                          fontFamily: 'Inter Tight',
+                          letterSpacing: 0.0,
+                        ),
+                    unselectedLabelStyle: FlutterFlowTheme.of(context)
+                        .textTheme
+                        .titleMedium
+                        ?.copyWith(
+                          fontFamily: 'Inter Tight',
+                          letterSpacing: 0.0,
+                        ),
+                    dividerColor: FlutterFlowTheme.of(context).primaryColor,
+                    indicatorColor: FlutterFlowTheme.of(context).primaryColor,
                     tabs: const [
                       Tab(
                         text: 'Inbox',
@@ -131,7 +160,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                           height: MediaQuery.sizeOf(context).height * 1,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                                .dialogBackgroundColor,
                             borderRadius: const BorderRadius.only(
                               bottomLeft: Radius.circular(0),
                               bottomRight: Radius.circular(0),
@@ -143,100 +172,8 @@ class _HomePageWidgetState extends State<HomePageWidget>
                             padding: EdgeInsets.zero,
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(16),
-                                child: Card(
-                                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                                  color: FlutterFlowTheme.of(context)
-                                      .primaryBackground,
-                                  elevation: 0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18),
-                                  ),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {},
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(8),
-                                          child: Container(
-                                            width: 50,
-                                            height: 50,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              borderRadius:
-                                                  BorderRadius.circular(24),
-                                            ),
-                                            alignment:
-                                                const AlignmentDirectional(
-                                                    0, 0),
-                                            child: Text(
-                                              'A',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .headlineSmall
-                                                  .override(
-                                                    fontFamily: 'Inter Tight',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryBackground,
-                                                    letterSpacing: 0.0,
-                                                  ),
-                                            ),
-                                          ),
-                                        ),
-                                        Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Hello World',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        fontSize: 16,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
-                                            ),
-                                            Text(
-                                              'Hello World',
-                                              maxLines: 2,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        fontSize: 12,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              wrapWithModel(
-                                model: _model.contactCardWidgetModel,
-                                updateCallback: () => safeSetState(() {}),
-                                child: ContactCardWidgetWidget(),
-                              ),
+                            children: const [
+                              MessageCard(),
                             ],
                           ),
                         ),
@@ -245,8 +182,8 @@ class _HomePageWidgetState extends State<HomePageWidget>
                         width: MediaQuery.sizeOf(context).width,
                         height: MediaQuery.sizeOf(context).height * 1,
                         decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                          color: FlutterFlowTheme.of(context)
+                              .dialogBackgroundColor,
                           borderRadius: const BorderRadius.only(
                             bottomLeft: Radius.circular(0),
                             bottomRight: Radius.circular(0),
@@ -259,8 +196,8 @@ class _HomePageWidgetState extends State<HomePageWidget>
                         width: MediaQuery.sizeOf(context).width,
                         height: MediaQuery.sizeOf(context).height * 1,
                         decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
+                          color: FlutterFlowTheme.of(context)
+                              .dialogBackgroundColor,
                           borderRadius: const BorderRadius.only(
                             bottomLeft: Radius.circular(0),
                             bottomRight: Radius.circular(0),
