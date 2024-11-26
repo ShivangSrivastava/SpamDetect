@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screen/home.dart';
+import 'package:frontend/screen/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'SpamDetect',
       theme: ThemeData.dark(),
-      home: const HomePage(),
+      home: const HomePageWidget(),
     );
   }
 }
