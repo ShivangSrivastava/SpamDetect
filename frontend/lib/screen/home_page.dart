@@ -91,7 +91,10 @@ class _HomePageWidgetState extends State<HomePageWidget>
           ),
           actions: [
             IconButton(
-              icon: Icon(widget.isDark ? Icons.nightlight : Icons.sunny),
+              icon: Icon(
+                widget.isDark ? Icons.nightlight : Icons.sunny,
+                color: Colors.white,
+              ),
               onPressed: () {
                 widget.changeTheme();
               },
@@ -113,8 +116,7 @@ class _HomePageWidgetState extends State<HomePageWidget>
                 Align(
                   alignment: const Alignment(0, 0),
                   child: TabBar(
-                    labelColor:
-                        FlutterFlowTheme.of(context).dialogBackgroundColor,
+                    labelColor: Colors.white,
                     unselectedLabelColor: const Color(0x8CE0E3E7),
                     labelStyle: FlutterFlowTheme.of(context)
                         .textTheme

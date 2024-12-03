@@ -41,7 +41,7 @@ class _TestPageWidgetState extends State<TestPageWidget> {
         backgroundColor: FlutterFlowTheme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primaryColor,
-         
+
           title: Text(
             'Test Sms',
             style:

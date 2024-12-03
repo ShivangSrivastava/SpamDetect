@@ -50,8 +50,7 @@ class MessageCard extends StatelessWidget {
                         .headlineSmall
                         ?.copyWith(
                           fontFamily: 'Inter Tight',
-                          color: FlutterFlowTheme.of(context)
-                              .dialogBackgroundColor,
+                          color: Colors.white,
                           letterSpacing: 0.0,
                         ),
                   ),

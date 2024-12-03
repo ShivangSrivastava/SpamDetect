@@ -38,6 +38,7 @@ dependencies:
   http: ^1.2.0
   google_fonts: ^6.2.1
   flutterflow_ui: ^0.3.1
+  firebase_core: ^3.4.0
 
 dev_dependencies:
   flutter_test:

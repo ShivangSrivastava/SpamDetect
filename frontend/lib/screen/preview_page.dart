@@ -83,8 +83,7 @@ class _PreviewPageWidgetState extends State<PreviewPageWidget> {
                                   .bodyMedium
                                   ?.copyWith(
                                     fontFamily: 'Inter',
-                                    color: FlutterFlowTheme.of(context)
-                                        .dialogBackgroundColor,
+                                    color: Colors.white,
                                     letterSpacing: 0.0,
                                   ),
                             ),
