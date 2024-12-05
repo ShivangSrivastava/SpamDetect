@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/core/app_theme.dart';
-import 'package:frontend/screen/home_page.dart';
+import 'package:frontend/pages/home_page.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-void main() {
+Future<void> main() async {
   runApp(const MyApp());
+  await [
+    Permission.sms,
+  ].request();
 }
 
 class MyApp extends StatefulWidget {
@@ -14,15 +18,20 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool isDark = false;
+  bool isDark = true;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'SpamDetect',
-      theme: isDark ? FlutterFlowTheme.darkTheme : FlutterFlowTheme.lightTheme,
-      home: HomePageWidget(
-        isDark: false,
+      title: 'Sms Spam Filtering',
+      theme: ThemeData(
+        fontFamily: GoogleFonts.lato().fontFamily,
+      ),
+      darkTheme: ThemeData(
+          fontFamily: GoogleFonts.lato().fontFamily,
+          brightness: Brightness.dark),
+      themeMode: (isDark == true) ? ThemeMode.dark : ThemeMode.light,
+      home: HomePage(
+        isDark: isDark,
         changeTheme: () {
           setState(() {
             isDark = !isDark;
