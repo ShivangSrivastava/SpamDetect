@@ -55,27 +55,27 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           IconButton(
-            icon: Icon(Icons.segment_sharp),
+            icon: Icon(Icons.refresh),
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CheckPage(
-                      ipAdress: _serverIp!,
-                    ),
-                  ));
+              setState(() {
+                isLoading = true;
+              });
+              _fetchSmsResponses();
             },
-          )
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          setState(() {
-            isLoading = true;
-          });
-          _fetchSmsResponses();
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CheckPage(
+                  ipAdress: _serverIp!,
+                ),
+              ));
         },
-        child: Icon(Icons.refresh),
+        child: Icon(Icons.segment_sharp),
       ),
       body: isLoading
           ? Center(
@@ -166,12 +166,16 @@ class _HomePageState extends State<HomePage> {
         return AlertDialog(
           title: Text('Enter Server IP'),
           content: TextField(
+            controller: TextEditingController(text: "192.168."),
             onChanged: (value) {
               setState(() {
                 _serverIp = value;
               });
             },
-            decoration: InputDecoration(hintText: "Enter the IP address"),
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+              hintText: "Enter the IP address",
+            ),
           ),
           actions: <Widget>[
             TextButton(
